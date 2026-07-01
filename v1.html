@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Tools × Coratti · Proposta de Joint Venture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noturno:#001621;
+    --noturno-2:#002230;
+    --noturno-3:#00303f;
+    --vulcanico:#FF4103;
+    --vulcanico-2:#e0380a;
+    --vulcanico-soft:rgba(255,65,3,.14);
+    --gold:#FFC145;
+    --paper:#F2EDE4;
+    --paper-dim:#b9c4c8;
+    --muted:#6f868f;
+    --line:rgba(178,196,202,.16);
+    --line-strong:rgba(178,196,202,.3);
+    --ok:#3ad29f;
+    --display:'Archivo',system-ui,sans-serif;
+    --body:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--noturno);color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--vulcanico);color:#fff}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--vulcanico);outline-offset:3px}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  .section{padding:104px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--vulcanico);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--vulcanico)}
+  h2.title{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.4vw,50px);line-height:1.05;letter-spacing:-.015em;max-width:20ch}
+  .lede{margin-top:20px;font-size:18px;color:var(--paper-dim);max-width:62ch}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(0,22,33,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{font-family:var(--display);font-weight:900;letter-spacing:-.02em;font-size:18px;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:10px;height:10px;background:var(--vulcanico);border-radius:3px;transform:rotate(45deg);box-shadow:0 0 14px var(--vulcanico)}
+  .navlinks{display:flex;gap:24px}
+  .navlinks a{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;padding:4px 0}
+  .navlinks a:hover,.navlinks a.on{color:var(--paper)}
+  @media(max-width:900px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{padding:96px 0 84px;position:relative;overflow:hidden;border-top:none}
+  .hero::after{content:"";position:absolute;right:-12%;top:-20%;width:560px;height:560px;background:radial-gradient(circle,var(--vulcanico-soft),transparent 62%);pointer-events:none}
+  .pill{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--vulcanico);background:var(--vulcanico-soft);border:1px solid rgba(255,65,3,.35);padding:8px 15px;border-radius:100px;margin-bottom:28px}
+  .hero h1{font-family:var(--display);font-weight:900;letter-spacing:-.03em;font-size:clamp(40px,7vw,84px);line-height:.98;max-width:16ch}
+  .hero h1 .pop{color:var(--vulcanico)}
+  .hero h1 .fade{color:var(--muted);font-weight:600}
+  .hero-sub{margin-top:28px;font-size:19px;color:var(--paper-dim);max-width:60ch}
+  .hero-cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:100px;font-family:var(--body);font-weight:700;font-size:15px;text-decoration:none;border:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+  .btn-primary{background:var(--vulcanico);color:#fff;box-shadow:0 12px 30px -10px rgba(255,65,3,.6)}
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--paper);border:1.5px solid var(--line-strong)}
+  .btn-ghost:hover{border-color:var(--vulcanico)}
+
+  /* stat bar */
+  .stat-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .stat-bar{display:flex;width:100%;height:58px;border-radius:4px;overflow:hidden;border:1px solid var(--line-strong)}
+  .stat-seg{display:flex;align-items:center;font-family:var(--mono);font-weight:600;font-size:13px}
+  .stat-seg.big{flex:0 0 82%;padding-left:18px;color:var(--vulcanico);background:repeating-linear-gradient(135deg,var(--vulcanico-soft) 0 9px,transparent 9px 18px);border-right:1px solid var(--vulcanico);gap:8px}
+  .stat-seg.big b{font-size:15px}
+  .stat-seg.small{flex:0 0 18%;background:var(--vulcanico);color:#fff;justify-content:center}
+  .stat-fine{margin-top:14px;font-size:14.5px;color:var(--muted)}
+
+  /* statement */
+  .statement{background:linear-gradient(160deg,var(--noturno-3),var(--noturno-2));border:1px solid var(--line);border-left:3px solid var(--vulcanico);border-radius:10px;padding:52px 44px;position:relative;overflow:hidden}
+  .statement .sl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+  .statement h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.6vw,38px);line-height:1.1;letter-spacing:-.01em;max-width:24ch}
+  .statement h3 span{color:var(--vulcanico)}
+  .statement-foot{margin-top:24px;font-size:17px;color:var(--paper-dim);max-width:64ch}
+  .statement-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .stag2{font-family:var(--mono);font-size:12px;padding:8px 14px;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--paper-dim)}
+
+  /* generic grids */
+  .grid{display:grid;gap:16px;margin-top:44px}
+  .dores-grid{grid-template-columns:repeat(3,1fr)}
+  .card-d{background:var(--noturno-2);border:1px solid var(--line);border-radius:8px;padding:24px;transition:transform .2s,border-color .2s}
+  .card-d:hover{transform:translateY(-3px);border-color:var(--line-strong)}
+  .card-d .dnum{font-family:var(--mono);font-size:12px;color:var(--vulcanico);letter-spacing:.1em}
+  .card-d h4{font-family:var(--display);font-weight:700;font-size:18px;margin:10px 0 8px;letter-spacing:-.01em}
+  .card-d p{font-size:14px;color:var(--paper-dim);line-height:1.55}
+  .card-d.leitura{background:var(--vulcanico-soft);border-color:var(--vulcanico)}
+  .card-d.leitura .dnum{color:var(--vulcanico)}
+
+  /* how */
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+  .how-item{display:flex;gap:14px;align-items:flex-start;background:var(--noturno-2);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+  .how-letter{flex:none;width:30px;height:30px;border-radius:7px;background:var(--vulcanico);color:#fff;font-family:var(--display);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .how-item p{font-size:14.5px;color:var(--paper)}
+
+  /* modules */
+  .modules-grid{grid-template-columns:repeat(3,1fr)}
+  .module-chip{border:1px solid var(--line);border-radius:8px;padding:18px;background:var(--noturno-2);display:flex;flex-direction:column;gap:8px}
+  .module-chip.mvp{border-color:var(--vulcanico);background:var(--vulcanico-soft)}
+  .module-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .module-top strong{font-family:var(--display);font-weight:700;font-size:15px}
+  .mvp-badge{font-family:var(--mono);font-size:10px;font-weight:600;color:#fff;background:var(--vulcanico);padding:3px 8px;border-radius:100px;letter-spacing:.04em}
+  .module-chip p{font-size:13px;color:var(--paper-dim);line-height:1.45}
+
+  /* model cards */
+  .model-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
+  .mcard{background:var(--noturno-2);border:1px solid var(--line);border-radius:8px;padding:28px;transition:transform .2s,border-color .2s}
+  .mcard:hover{transform:translateY(-3px);border-color:var(--line-strong)}
+  .mcard .num{font-family:var(--display);font-size:34px;font-weight:800;color:var(--vulcanico);letter-spacing:-.02em}
+  .mcard .mlabel{font-size:14px;font-weight:600;color:var(--paper);margin-top:8px}
+  .mcard .mdesc{font-size:13.5px;color:var(--paper-dim);margin-top:12px;line-height:1.55}
+
+  /* responsibility split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .resp{border-radius:8px;padding:28px;border:1px solid var(--line)}
+  .resp .ctitle{font-family:var(--display);font-weight:700;font-size:19px;margin-bottom:16px}
+  .resp.coratti{background:var(--noturno-2)}
+  .resp.gt{background:linear-gradient(160deg,var(--noturno-3),var(--noturno-2));border-left:3px solid var(--gold)}
+  .resp .item{display:flex;gap:12px;padding:11px 0;font-size:14.5px;color:var(--paper-dim);border-bottom:1px solid var(--line)}
+  .resp .item:last-child{border-bottom:none}
+  .resp .ico{color:var(--vulcanico);font-weight:800;flex:none}
+  .resp.gt .ico{color:var(--gold)}
+
+  /* simulator */
+  .simulator{background:linear-gradient(155deg,var(--vulcanico) 0%,var(--vulcanico-2) 100%);border-radius:12px;padding:52px 44px;color:#fff;position:relative;overflow:hidden}
+  .simulator::before{content:"";position:absolute;top:-140px;right:-90px;width:380px;height:380px;border-radius:50%;background:var(--gold);opacity:.22;filter:blur(24px)}
+  .sim-head{max-width:600px;position:relative}
+  .sim-head .sl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#ffe0c2;margin-bottom:14px}
+  .sim-head h2{font-family:var(--display);font-weight:800;color:#fff;font-size:clamp(24px,3.6vw,36px);letter-spacing:-.01em}
+  .sim-head p{color:rgba(255,255,255,.9);margin-top:14px;font-size:16px}
+  .sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:40px;position:relative}
+  .slider-block label{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:15px;margin-bottom:14px}
+  .slider-block label .val{font-family:var(--mono);background:rgba(255,255,255,.2);padding:2px 12px;border-radius:100px}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:100px;background:rgba(255,255,255,.3);outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:5px solid var(--vulcanico-2);cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border:5px solid var(--vulcanico-2);border-radius:50%;background:#fff;cursor:pointer}
+  .sim-note{margin-top:20px;font-family:var(--mono);font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.55}
+  .result-panel{background:rgba(0,22,33,.28);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:30px;backdrop-filter:blur(6px)}
+  .result-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.2)}
+  .result-row:last-child{border-bottom:none}
+  .rlabel{font-size:14px;font-weight:600;color:rgba(255,255,255,.85)}
+  .rval{font-family:var(--display);font-size:22px;font-weight:800}
+  .result-row.highlight .rval{font-size:30px;color:var(--gold)}
+
+  /* scenarios */
+  .scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+  .scenario{border-radius:8px;padding:28px;border:1px solid var(--line);background:var(--noturno-2);position:relative}
+  .scenario.mid{border-color:var(--vulcanico);box-shadow:0 0 0 3px var(--vulcanico-soft)}
+  .scenario .stag{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .scenario h4{font-family:var(--display);font-weight:700;font-size:20px;margin-top:8px}
+  .scenario .big{font-family:var(--display);font-size:30px;font-weight:800;color:var(--vulcanico);margin-top:16px;letter-spacing:-.02em}
+  .scenario.mid .big{color:var(--gold)}
+  .scenario .fine{font-size:13px;color:var(--muted);margin-top:4px}
+  .scenario ul{margin-top:16px;list-style:none;font-size:13.5px;color:var(--paper-dim)}
+  .scenario ul li{padding:7px 0;display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line)}
+  .scenario ul li:first-child{border-top:none}
+  .scenario ul li span:last-child{font-family:var(--mono);color:var(--paper)}
+
+  /* cta */
+  .cta{text-align:center;padding:104px 0 40px}
+  .cta h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.6vw,48px);line-height:1.08;letter-spacing:-.02em;max-width:20ch;margin:0 auto}
+  .cta h2 .pop{color:var(--vulcanico)}
+  .cta-sub{margin-top:20px;font-size:17px;color:var(--paper-dim);max-width:54ch;margin-left:auto;margin-right:auto}
+
+  footer{border-top:1px solid var(--line);padding:34px 0}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  footer .fb{font-family:var(--display);font-weight:900;font-size:16px}
+  footer .fm{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- responsive / mobile ---------- */
+  @media(max-width:900px){.dores-grid,.modules-grid,.scenario-grid{grid-template-columns:1fr}}
+  @media(max-width:820px){.sim-grid{grid-template-columns:1fr;gap:28px}}
+  @media(max-width:760px){
+    .section{padding:66px 0}
+    .wrap{padding:0 20px}
+    .hero{padding:60px 0 52px}
+    .statement,.simulator{padding:34px 24px}
+    .model-grid,.how-grid,.split{grid-template-columns:1fr}
+    .btn{flex:1 1 auto;justify-content:center}
+    .result-row.highlight .rval{font-size:26px}
+  }
+  @media(max-width:560px){
+    body{font-size:16px}
+    .stat-seg.big .segtxt{display:none}
+    .stat-seg.big{flex:0 0 72%}
+    .stat-seg.small{flex:0 0 28%}
+    .statement{padding:28px 20px}
+    .simulator{padding:28px 20px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Growth Tools</div>
+    <div class="navlinks">
+      <a href="#oportunidade">Oportunidade</a>
+      <a href="#dores">Dores</a>
+      <a href="#modulos">Módulos</a>
+      <a href="#modelo">Modelo</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#cenarios">Cenários</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="pill">Growth Tools × Coratti — Proposta de Joint Venture</span>
+    <h1>App é commodity.<br><span class="pop">Visão de negócio</span>, <span class="fade">não.</span></h1>
+    <p class="hero-sub">Uma joint venture para levar inteligência de gestão às concessionárias — com sua rede e sua força comercial, mais os cases de sucesso sólidos e a operação completa da Growth Tools.</p>
+    <div class="hero-cta">
+      <a href="#simulador" class="btn btn-primary">Ver simulador de receita ↓</a>
+      <a href="#modelo" class="btn btn-ghost">Entender o modelo</a>
+    </div>
+  </div>
+</header>
+
+<!-- OPORTUNIDADE -->
+<section class="section" id="oportunidade">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">A oportunidade</div>
+      <h2 class="title">Concessionárias coletam dados. Não tratam, não consolidam, não decidem.</h2>
+      <p class="lede">Montadora, concessionária, estoque, peças, financiamento e cliente final ainda decidem no achismo. O dado para resolver isso já existe — falta a camada que transforma em ação.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:52px">
+      <div class="stat-labels"><span>Mercado que a loja atende hoje</span><span>Mercado que escapa</span></div>
+      <div class="stat-bar">
+        <div class="stat-seg big"><b>98%</b><span class="segtxt">dos CPFs reprovados ou abandonados</span></div>
+        <div class="stat-seg small">2%</div>
+      </div>
+      <p class="stat-fine">Em uma única loja, 80 a 90 CPFs por dia entram, são tratados e desaparecem. Hoje a venda mira nos 2%. O produto está nos 98%.</p>
+    </div>
+
+    <div class="statement reveal" style="margin-top:56px">
+      <div class="sl">O diferencial real</div>
+      <h3>Qualquer desenvolvedor entrega um app. <span>Poucos entregam a equipe por trás dele.</span></h3>
+      <p class="statement-foot">O que separa um software que gera receita de um software que só funciona é visão sistêmica, visão de negócio e cases de sucesso sólidos em crescimento e gestão de produtos digitais — não a tela.</p>
+      <div class="statement-tags">
+        <span class="stag2">Visão sistêmica</span>
+        <span class="stag2">Visão de negócio</span>
+        <span class="stag2">Cases de sucesso sólidos</span>
+        <span class="stag2">Operação ponta a ponta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DORES -->
+<section class="section" id="dores">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Onde o dinheiro vaza hoje</div>
+      <h2 class="title">5 dores que já são venda perdida</h2>
+      <p class="lede">Cada uma dessas dores é receita que já estava na mão da loja e se perde por falta de camada de inteligência.</p>
+    </div>
+    <div class="grid dores-grid reveal">
+      <div class="card-d"><span class="dnum">01</span><h4>Estoque sem previsão</h4><p>Compra de peças no feeling: capital parado, ruptura no item que vende, venda perdida por falta.</p></div>
+      <div class="card-d"><span class="dnum">02</span><h4>Dados comerciais desperdiçados</h4><p>80 a 90 CPFs/dia por loja. Reprovou ou não comprou, o dado morre — renda, região e intenção viram lixo.</p></div>
+      <div class="card-d"><span class="dnum">03</span><h4>Crédito mal aproveitado</h4><p>Venda mira só nos 2% aprovados no modelo tradicional. Os 98% precisam de outro produto — consórcio, leasing, aluguel.</p></div>
+      <div class="card-d"><span class="dnum">04</span><h4>Sem CRM de verdade</h4><p>Ninguém sabe quem tentou comprar, quem desistiu ou quem pode recomprar. Sem follow-up, sem recorrência.</p></div>
+      <div class="card-d"><span class="dnum">05</span><h4>Montadora cega na ponta</h4><p>A montadora depende da loja para entender demanda real, mas a loja não tem como enviar isso estruturado.</p></div>
+      <div class="card-d leitura"><span class="dnum">→</span><h4>A leitura</h4><p>O dado para resolver cada dor já existe — falta a camada que transforma em ação.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section" id="como-funciona">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Como funciona</div>
+      <h2 class="title">Uma camada de inteligência por cima do que já roda</h2>
+      <p class="lede">Não troca o sistema obrigatório da montadora. Captura, organiza e interpreta o que a loja já gera, e devolve em decisão.</p>
+    </div>
+    <div class="grid how-grid reveal">
+      <div class="how-item"><span class="how-letter">A</span><p>Conecta sem invadir: vive ao lado do ERP, não no lugar dele.</p></div>
+      <div class="how-item"><span class="how-letter">B</span><p>Modular: entra por onde gera dinheiro rápido e cresce por módulos.</p></div>
+      <div class="how-item"><span class="how-letter">C</span><p>Acionável: vira tarefa para o vendedor e mensagem de WhatsApp.</p></div>
+      <div class="how-item"><span class="how-letter">D</span><p>Escala: consolida várias lojas e vira produto para a montadora.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section class="section" id="modulos">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">O produto</div>
+      <h2 class="title">Plataforma modular, não um monolito</h2>
+      <p class="lede">Seis módulos independentes. Os marcados MVP entram na primeira fase, direto onde gera caixa mais rápido.</p>
+    </div>
+    <div class="grid modules-grid reveal">
+      <div class="module-chip mvp"><div class="module-top"><strong>CRM Comercial</strong><span class="mvp-badge">MVP</span></div><p>Lead, cliente e tentativa de venda com a próxima ação sempre clara.</p></div>
+      <div class="module-chip mvp"><div class="module-top"><strong>Crédito &amp; Recuperação</strong><span class="mvp-badge">MVP</span></div><p>Status de aprovação e régua de recuperação para os reprovados e desistentes.</p></div>
+      <div class="module-chip mvp"><div class="module-top"><strong>Estoque &amp; Peças</strong><span class="mvp-badge">MVP</span></div><p>Ciclo de recompra de peças com alerta automático de reposição.</p></div>
+      <div class="module-chip"><div class="module-top"><strong>WhatsApp &amp; Régua</strong></div><p>Mensagens automáticas geradas pelo sistema para follow-up e recompra.</p></div>
+      <div class="module-chip mvp"><div class="module-top"><strong>Dashboard de Gestão</strong><span class="mvp-badge">MVP</span></div><p>Oportunidades, relatórios e exportação em um painel único.</p></div>
+      <div class="module-chip"><div class="module-top"><strong>Inteligência p/ Montadora</strong></div><p>Consolida várias lojas em visão de demanda e estoque regional.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELO / JV -->
+<section class="section" id="modelo">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Estrutura da Joint Venture</div>
+      <h2 class="title">Setup enxuto. Recorrência dividida. Zero time técnico pra você.</h2>
+      <p class="lede">Coratti entra com capital de setup e rede de concessionárias. Growth Tools entra com produto, tecnologia e operação completa.</p>
+    </div>
+
+    <div class="model-grid reveal">
+      <div class="mcard"><div class="num">R$ 60.000</div><div class="mlabel">Desenvolvimento do app (setup)</div><div class="mdesc">Pagamento único, parcelável em 10x de R$ 6.000 — entrada leve, sem impacto no caixa da operação.</div></div>
+      <div class="mcard"><div class="num">40%</div><div class="mlabel">Participação Coratti na receita (JV)</div><div class="mdesc">Sobre a receita total gerada pelo app — rede Coratti e demais mercado — sem custo operacional adicional.</div></div>
+      <div class="mcard"><div class="num">R$ 1.500</div><div class="mlabel">Custo por loja / mês — rede Coratti</div><div class="mdesc">Preço de custo para as concessionárias da própria rede Coratti — cobre o sistema internamente, sem gerar receita adicional para o Coratti.</div></div>
+      <div class="mcard"><div class="num">R$ 3.000</div><div class="mlabel">Preço por loja / mês — novos clientes</div><div class="mdesc">Tabela cheia para novas concessionárias e montadoras fora da rede Coratti — é aqui que mora a receita e a participação dele.</div></div>
+    </div>
+
+    <div class="split reveal">
+      <div class="resp coratti">
+        <div class="ctitle">Coratti entra com</div>
+        <div class="item"><span class="ico">＋</span>Capital de setup (R$ 60K, parcelado)</div>
+        <div class="item"><span class="ico">＋</span>Rede de concessionárias</div>
+        <div class="item"><span class="ico">＋</span>Relacionamento comercial e validação de mercado</div>
+        <div class="item"><span class="ico">＋</span>Participação de 40% na receita, sem operar nada</div>
+      </div>
+      <div class="resp gt">
+        <div class="ctitle">Growth Tools entra com</div>
+        <div class="item"><span class="ico">＋</span>Desenvolvimento e evolução do produto</div>
+        <div class="item"><span class="ico">＋</span>Operação técnica e infraestrutura</div>
+        <div class="item"><span class="ico">＋</span>Suporte e treinamentos</div>
+        <div class="item"><span class="ico">＋</span>EAD integrado — implementação e operação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULADOR -->
+<section class="section" id="simulador">
+  <div class="wrap">
+    <div class="simulator reveal">
+      <div class="sim-head">
+        <div class="sl">Simulador de receita — visão Coratti</div>
+        <h2>Quanto de receita entra para o Coratti</h2>
+        <p>A rede própria do Coratti não entra aqui — ela paga só o custo do sistema, sem gerar receita adicional pra ele. Quem gera receita e participação são os novos clientes: concessionárias e montadoras fora da rede.</p>
+      </div>
+      <div class="sim-grid">
+        <div>
+          <div class="slider-block">
+            <label>Novos clientes — concessionárias e montadoras <span class="val" id="lbl-mercado">200</span></label>
+            <input type="range" id="sl-mercado" min="0" max="500" value="200" step="10">
+          </div>
+          <div class="sim-note">A rede própria do Coratti (custo de R$ 1.500/loja/mês) não é contada nesta simulação — ela cobre o sistema internamente, sem gerar receita para ele.</div>
+        </div>
+        <div class="result-panel">
+          <div class="result-row"><span class="rlabel">Receita mensal — novos clientes</span><span class="rval" id="out-mensal">—</span></div>
+          <div class="result-row"><span class="rlabel">Receita anual — novos clientes</span><span class="rval" id="out-anual">—</span></div>
+          <div class="result-row highlight"><span class="rlabel">Sua parte (40%) / ano</span><span class="rval" id="out-share">—</span></div>
+          <div class="sim-note">Setup de R$ 60.000 (10x) se paga rapidamente com a própria participação recorrente — sem contar receita adicional de EAD.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENÁRIOS -->
+<section class="section" id="cenarios">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Cenários de referência</div>
+      <h2 class="title">Três leituras de crescimento — só receita real</h2>
+      <p class="lede">A rede própria do Coratti não entra aqui, ela paga só o custo do sistema. Os cenários abaixo mostram apenas novos clientes: concessionárias e montadoras.</p>
+    </div>
+    <div class="scenario-grid reveal">
+      <div class="scenario">
+        <span class="stag">Conservador</span>
+        <h4>100 novos clientes</h4>
+        <div class="big">R$ 1,44M</div>
+        <div class="fine">participação anual (40%)</div>
+        <ul>
+          <li><span>Receita anual</span><span>R$ 3,6M</span></li>
+          <li><span>Novos clientes</span><span>100</span></li>
+          <li><span>Preço / loja</span><span>R$ 3.000/mês</span></li>
+        </ul>
+      </div>
+      <div class="scenario mid">
+        <span class="stag">Moderado</span>
+        <h4>200 novos clientes</h4>
+        <div class="big">R$ 2,88M</div>
+        <div class="fine">participação anual (40%)</div>
+        <ul>
+          <li><span>Receita anual</span><span>R$ 7,2M</span></li>
+          <li><span>Novos clientes</span><span>200</span></li>
+          <li><span>Preço / loja</span><span>R$ 3.000/mês</span></li>
+        </ul>
+      </div>
+      <div class="scenario">
+        <span class="stag">Agressivo</span>
+        <h4>300 novos clientes</h4>
+        <div class="big">R$ 4,32M</div>
+        <div class="fine">participação anual (40%)</div>
+        <ul>
+          <li><span>Receita anual</span><span>R$ 10,8M</span></li>
+          <li><span>Novos clientes</span><span>300</span></li>
+          <li><span>Preço / loja</span><span>R$ 3.000/mês</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap reveal">
+    <h2>Você assina, a gente opera, <span class="pop">o mercado paga.</span></h2>
+    <p class="cta-sub">Zero equipe técnica, zero suporte, zero treinamento pra você montar. Dê o aceite e começamos a ganhar dinheiro juntos.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fb">Growth Tools</div>
+    <div class="fm">Proposta de Joint Venture · Confidencial</div>
+  </div>
+</footer>
+
+<script>
+  /* reveal */
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* simulador */
+  const slMercado=document.getElementById('sl-mercado');
+  const lblMercado=document.getElementById('lbl-mercado');
+  const outMensal=document.getElementById('out-mensal');
+  const outAnual=document.getElementById('out-anual');
+  const outShare=document.getElementById('out-share');
+  const fmt=(n)=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+  function calc(){
+    const mercado=parseInt(slMercado.value,10);
+    lblMercado.textContent=mercado;
+    const mensal=mercado*3000;
+    const anual=mensal*12;
+    const share=anual*0.40;
+    outMensal.textContent=fmt(mensal);
+    outAnual.textContent=fmt(anual);
+    outShare.textContent=fmt(share);
+  }
+  slMercado.addEventListener('input',calc);
+  calc();
+
+  /* nav active state */
+  const navMap=[...document.querySelectorAll('.navlinks a')];
+  const secs=navMap.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const navIo=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const id='#'+e.target.id;navMap.forEach(a=>a.classList.toggle('on',a.getAttribute('href')===id));}});},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>navIo.observe(s));
+</script>
+</body>
+</html>
